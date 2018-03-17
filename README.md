@@ -1,7 +1,5 @@
 # interview-preparing
 prepare for interview , for job , write every day , look back frequently
-# interview-preparing
-prepare for interview , for job , write every day , look back frequently
 现在时间：2018年3月16日
 1. 首先，要经常刷新这个仓库；
 2. 从现在开始，经常记录平时的总结、注意事项、经验；
