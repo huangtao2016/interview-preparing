@@ -1,0 +1,75 @@
+commit0317-maven
+   1. maven web项目默认是没有java源代码目录的，所以需要手动创建，并设置其为源代码目录
+           方法：
+		        右键main目录-> New->Directory->输入java->右键java
+				->Mark Directory as-> Sources Root
+                这样就创建了存放java源文件的目录了
+    
+   2. JDBC连接数据库有哪些问题？
+        >> 数据库连接时，使用时就创建，不用就释放，对数据库进行频繁的开启和关闭，
+		造成数据库资源浪费，影响数据库性能；
+		 解决方法： 使用数据库连接池
+		
+		>>  sql语句硬编码
+		 解决方法：将sql语句配置在配置文件中
+	
+	    >>  向prepareStatement中设置参数时，对占位符的位置和设置参数值，都硬编码在代码中
+		  解决：将sql语句及占位符和参数都配置在xml中
+		  
+		>>  从resultSet中遍历结果数据时，存在硬编码，不利于系统维护；
+		  解决：自动将查询的结果集，映射成java对象
+		  
+    3. 用mybatis来解决这些问题
+	       mapper.xml ：就是映射配置文件，主要是配置sql语句，因为mybatis主要是跟sql语句打交道
+		   
+	   用mybatis开发有两种方法
+	       方法一： dao接口+dao实现类
+		       思路：在dao接口中写方法 -> 在dao实现类中注入sqlSessionFactory，然后在方法中创建sqlSession，再用
+			    SqlSession操作数据库
+				
+		   方法二： mapper代理
+		       思路： 写xxxMapper接口，等同于dao层接口；
+			          写mapper.xml(×麦儿)映射文件，主要是写sql语句
+			   只要遵循一些开发规范，那么mybatis就可以自动生成mapper接口的实现类的代理对象
+			   开发规范：
+			       1、 在mapper.xml中，命名空间namespace等于mapper接口的全限定名
+				   2、 mapper.java接口中的方法名要与mapper.xml中的statement的id一致
+				   3、 mapper.java接口中的方法输入参数要与mapper.xml中的statement的parameType指定的类型一致
+				   4、 mapper.java接口中的方法返回值类型要与mapper.xml中的statement的resultType指定的类型一致
+				
+				那么在测试案例中怎么写呢？
+				    首先，有一点要明确，就是无论是哪种方法，最后都是要得到会话sqlSession
+					SqlSession sqlsession=sqlSessionFactory.openSession();
+					
+					//然后创建mapper接口的代理对象，因为我们没有写mapper接口的实现类，所以，
+					UserMapper usermapper = sqlSession.getMapper(UserMapper.class);
+					
+					//调用userMapper的方法
+					User findUserById=usermapper.findUserById(1);
+					
+				同样，要在SqlConfig.xml中加载映射文件，不然找不到。
+		   
+	4. 怎么在特定的文件夹下打开命令行窗口？
+         比如：一般我们是先打开cmd，再敲入全路径。
+               如果路径很长，或者记不住，就有点费劲
+         小trick：
+             进入你想要的路径文件夹下，shift+右键 ->> 在此处打开命令行窗口 ->> OK	
+			 
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
+		   
