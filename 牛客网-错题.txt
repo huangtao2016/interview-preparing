@@ -1,0 +1,74 @@
+牛客网错题   day1
+
+1） 下列代码运行结果是
+        public class A implements B extends C{
+		     public static void main(String args[]){
+			      System.out.println("hello sunline!");
+			 }
+		}
+	编译出错！ 因为： 先继承，再实现接口
+	
+
+2）  Math类中的3个取整方法
+          ceil：天花板，向上取整 ；
+		  floor： 地板， 向下取整 ；
+		  round：四舍五入，+0.5后再向下取整 。
+		  
+		  
+3）  Java数据库连接库JDBC用到哪种设计模式?
+        桥接模式
+		
+		
+4）  下面哪个标识符是合法的？
+           "9HelloWorld"  ：错，不能以字母开头
+		   "_Hello World"  ：错 ，不能有空格
+		   "Hello*World"   ：错 ， 不能有*
+		   "Hello$World"  ：正确
+	java的变量名有三种元素构成：数字+字符+$+下划线  不能有空格
+	
+	
+5）  引用变量被final修饰之后，不能再指向其他对象，它指向的对象的内容也是不可变的。
+      上面这句话是错的。
+	  因为：使用 final 关键字修饰一个变量时，是指引用变量不能变，
+	  引用变量所指向的对象中的内容还是可以改变的。
+	  
+	
+牛客网错题  day2
+
+1） socket编程中，以下哪个socket的操作是不属于服务端操作的（）？
+        accept
+	    listen
+		connect
+		close
+	 accept、listen、close是服务端 ；
+	 connect、 close是客户端 。
+	 
+2） 以下哪个式子有可能在某个进制下成立（）？
+     13*14=204
+	 解：设是在n进制下，
+	         （1*n+3）*(1*n+4) =2*n^2+0*n+4 
+		解这个方程，可得n=8/-1 所以，在8进制下可以成立。
+		
+3） public class Test
+{
+    static boolean foo(char c)
+    {
+        System.out.print(c);
+        return true;
+    }
+    public static void main( String[] argv )
+    {
+        int i = 0;
+        for ( foo('A'); foo('B') && (i < 2); foo('C'))
+        {
+            i++ ;
+            foo('D');
+        }
+    }
+}
+What is the result?
+        ABDCBDCB
+		ABCDABCD
+		Compilation fails.
+		An exception is thrown at runtime.
+	解析：考for循环的执行顺序，1.先执行初始化条件，2.执行判断条件，3.如果满足2的条件，执行循环体中代码；4.执行foo('c'), 5.初始化条件不在执行，友从2开始执行
